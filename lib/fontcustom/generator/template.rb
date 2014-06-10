@@ -118,6 +118,9 @@ module Fontcustom
         when :preprocessor
           url = "font-url"
           path = @font_path_alt
+        when :LESS
+          url = "url"
+          path = @font_path_alt
         when :preview
           url = "url"
           path = @font_path_preview
