@@ -154,13 +154,6 @@ module Fontcustom
         output.join ",\n"
       end
 
-      def glyph_classes
-        output = @glyphs.map do |name, value|
-          @options[:css_selector].sub("{{glyph}}", name.to_s)
-        end
-        output.join ",\n"
-      end
-
       def glyph_properties
 %Q|  display: inline-block;
   font-family: "#{font_name}";
@@ -182,6 +175,14 @@ module Fontcustom
         end
         output.join "\n"
       end
+
+      def glyphs_less
+        output = @glyphs.map do |name, value|
+          %Q|#{@options[:css_selector].sub('{{glyph}}', name.to_s)} { &:before { content: "\\#{value[:codepoint].to_s(16)}"; }}|
+        end
+        output.join "\n"
+      end
+
     end
   end
 end
