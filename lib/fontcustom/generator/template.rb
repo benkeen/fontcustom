@@ -183,6 +183,13 @@ module Fontcustom
         output.join "\n"
       end
 
+      def glyph_vars
+        output = @glyphs.map do |name, value|
+          %Q|@icon-#{name.to_s}: "\\#{value[:codepoint].to_s(16)}";|
+        end
+        output.join "\n"
+      end
+
     end
   end
 end
